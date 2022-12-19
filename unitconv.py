@@ -35,8 +35,8 @@ current = TYPE.imark()
 charge = TYPE.imark()
 
 TYPE.MAPPING = {
-    temperature : (("K","Kelvin"),("C", "Celcius"),("F","Fahrenheit")),
-    preassure : [],
+    temperature : ("K", "C", "F","temperature"),
+    preassure : ("Pa", "atm", "bar", "mmHg", "N/m2","preassure"),
     volume : [],
     nmols : [],
     mass : [],
@@ -60,5 +60,15 @@ class Measurement:
         self.value = value
         self.unit = unit
         self.type = None
+        for k,v in TYPE.MAPPING.items():
+            for m in v[:-1]:
+                if self.unit.lower() == m.lower(): 
+                    self.type = TYPE.MAPPING[k][-1]
+                    self.unit = m
+                    break
 
-print(TYPE.MAPPING[temperature])
+print()
+gr = Measurement(10,"n/m2")
+print(gr.type)
+print(gr.unit)
+
