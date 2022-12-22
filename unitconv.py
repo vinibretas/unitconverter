@@ -65,9 +65,11 @@ class Measurement:
                     self.type = TYPE.MAPPING[k][-1]
                     self.unit = m
                     break
+    
+    def __repr__(self) -> str:
+        return "{} {} ({})".format(self.value, self.unit,self.type.upper())
 
-print()
-gr = Measurement(10,"n/m2")
-print(gr.type)
-print(gr.unit)
+    def __str__(self):
+        return "{} {}".format(self.value, self.unit,self.type.upper())
+
 
